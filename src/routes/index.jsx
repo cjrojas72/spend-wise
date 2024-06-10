@@ -1,17 +1,28 @@
-import { Link } from "react-router-dom";
+import * as React from 'react'
+import { useAuth } from "@clerk/clerk-react"
+import { Outlet, useNavigate } from "react-router-dom"
 
 export default function IndexPage() {
+  const { userId, isLoaded } = useAuth()
+  const navigate = useNavigate()
+
+  console.log('test', userId)
+
+  React.useEffect(() => {
+      if (isLoaded && !userId) {
+          navigate("/sign-in")
+      }
+      if( isLoaded && userId){
+          navigate("/dashboard")
+      }
+  }, [isLoaded])
+
+  if (!isLoaded) return "Loading..."
+
   return (
-    <div>
-      <h1>This is the index page</h1>
-      <div>
-        <ul>
-          <li><Link to="/sign-up">Sign Up</Link></li>
-          <li><Link to="/sign-in">Sign In</Link></li>
-          <li><Link to="/transactions">Contact</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link></li>
-        </ul>
-      </div>
-    </div>
+    <>
+    </>
   )
 }
+
+

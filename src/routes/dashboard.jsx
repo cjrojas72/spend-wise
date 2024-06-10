@@ -1,15 +1,19 @@
+import { SignOutButton } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import Header from "../components/header/header";
+import { WelcomeMsg } from "../components/welcome-msg/welcome-msg";
+import DashboardGridLayout from "../components/dashboard-layout/dashboard-layout";
+
 
 export default function DashboardPage() {
   return (
     <>
-      <h1>Dashboard page</h1>
-      <p>This is a protected page.</p>
-
-      <ul>
-        <li><Link to="/dashboard/invoices">Invoices</Link></li>
-        <li><Link to="/">Return to index</Link></li>
-      </ul>
+      <Header />
+      <DashboardGridLayout>
+        <WelcomeMsg />
+      </DashboardGridLayout>
+      
     </>
   );
 }

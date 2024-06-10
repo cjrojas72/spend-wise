@@ -12,7 +12,8 @@ import IndexPage from './routes'
 import SignInPage from './routes/sign-in'
 import SignUpPage from './routes/sign-up'
 import DashboardPage from './routes/dashboard'
-import TransactionsPage from './routes/transactions'
+import BudgetsPage from './routes/budgets'
+import ExpensesPage from './routes/expenses'
 
 
 const router = createBrowserRouter([
@@ -20,7 +21,6 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: "/", element: <IndexPage /> },
-      { path: "/transactions", element: <TransactionsPage /> },
       { path: "/sign-in/*", element: <SignInPage /> },
       { path: "/sign-up/*", element: <SignUpPage /> },
       {
@@ -28,6 +28,8 @@ const router = createBrowserRouter([
         path: "dashboard",
         children: [
           { path: "/dashboard", element: <DashboardPage /> },
+          { path: "/dashboard/budgets", element: <BudgetsPage /> },
+          { path: "/dashboard/expenses", element: <ExpensesPage />}
         ]
       }
     ]
