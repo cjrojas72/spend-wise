@@ -8,6 +8,7 @@ import MUIModal from "../components/mui-modal/mui-modal";
 import { useState, useEffect } from "react";
 import DynamicForm from "../components/dynamic-form/dynamic-form";
 import data from '../test-data/test-data.json';
+import AddExpenseForm from "../components/forms/add-expense-form/add-expense-form";
 
 
 export default function ExpensesPage() {
@@ -21,44 +22,9 @@ export default function ExpensesPage() {
         { name: 'category', label: 'Category', type: 'text', required: true }
       ];
 
-      const testdata = [
-        {
-            "description": "Groceries",
-            "amount": 50.00,
-            "date": "2024-06-10",
-            "category": "Food"
-          },
-          {
-            "description": "Gasoline",
-            "amount": 40.00,
-            "date": "2024-06-09",
-            "category": "Transportation"
-          },
-          {
-            "description": "Movie Tickets",
-            "amount": 25.00,
-            "date": "2024-06-08",
-            "category": "Entertainment"
-          },
-          {
-            "description": "Dinner at Restaurant",
-            "amount": 100.00,
-            "date": "2024-06-07",
-            "category": "Food"
-          },
-          {
-            "description": "Shopping",
-            "amount": 80.00,
-            "date": "2024-06-06",
-            "category": "Shopping"
-          }
-      ];
 
       const [isModalOpen, setIsModalOpen] = useState(false);
       const [modalContent, setModalContent] = useState(null);
-      const [modalTitle, setModalTitle] = useState(null);
-      const [modalButtonText, setModalButtonText] = useState(null);
-      const [modalBtnFunc, setModalBtnFunc] = useState(null);
       const [expenses, setExpenses] = useState(null);
 
       
@@ -77,10 +43,8 @@ export default function ExpensesPage() {
     fetchData(); // Call the async function
   }, []); 
 
-      const handleOpenModal = (content,title, buttonText) => {
+      const handleOpenModal = (content) => {
         setModalContent(content);
-        setModalTitle(title);
-        setModalButtonText(buttonText);
         setIsModalOpen(true);
       };
     
@@ -88,8 +52,8 @@ export default function ExpensesPage() {
         setIsModalOpen(false);
       };
 
-      const handleAddExpense =() =>{
-        console.log("Hi");
+      const handleFormSubmit =(data) =>{
+        console.log(data);
       }
 
       
@@ -109,10 +73,7 @@ export default function ExpensesPage() {
             <Button
                 variant="contained"
                 onClick={() => handleOpenModal(
-                    <DynamicForm fields={addExpenseFormFields}/>, 
-                    "Add Expense",
-                    "Add",
-
+                    <AddExpenseForm />
                 )}
             >
                 Add Expense
@@ -122,17 +83,21 @@ export default function ExpensesPage() {
         </div>
         
         <Card>
-            <MUIDataTable  headers={["Description", "Amount", "Date", "Category"]} data={testdata} columns ={["description", "amount", "date", "category"]}/>
+            <MUIDataTable  
+                headers={["Description", "Amount", "Date", "Category"]} 
+                data={expenses} 
+                columns ={["description", "amount", "date", "category"]}/>
         </Card>
       </DashboardGridLayout>
 
       <MUIModal 
         isOpen={isModalOpen} 
         onClose={handleCloseModal} 
-        title={modalTitle}  
-        buttonTextPrime = {modalButtonText}
+        title="Add Expense"  
         content={modalContent}
-        buttonLogic = {handleAddExpense}
+        buttonText="Add"
+        showToast={true}
+        toastMsg="Expense Added"
         />
       
     </>

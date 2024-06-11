@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Typography } from '@mui/material';
 
-const DynamicFormMui = ({ fields }) => {
+const DynamicFormMui = ({ fields, onSubmit }) => {
   const [formData, setFormData] = useState({});
 
   const handleChange = (e) => {
@@ -12,14 +12,8 @@ const DynamicFormMui = ({ fields }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    // You can perform form submission actions here, like sending data to a server
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => { e.preventDefault(); onSubmit(formData); }}>
       <Grid container spacing={2}>
         {fields.map(field => (
           <Grid item xs={12} key={field.name}>
