@@ -1,0 +1,44 @@
+
+{
+    "expenses": [
+      {
+        "id": 1,
+        "category": "Food",
+        "amount": 50.00,
+        "date": "2024-06-01",
+        "description": "Lunch with friends"
+      },
+      {
+        "id": 2,
+        "category": "Transportation",
+        "amount": 30.00,
+        "date": "2024-06-05",
+        "description": "Uber ride"
+      },
+      {
+        "id": 3,
+        "category": "Entertainment",
+        "amount": 25.00,
+        "date": "2024-06-10",
+        "description": "Movie tickets"
+      }
+    ],
+    "budgets": [
+      {
+        "id": 1,
+        "category": "Food",
+        "amount": 200.00
+      },
+      {
+        "id": 2,
+        "category": "Transportation",
+        "amount": 100.00
+      },
+      {
+        "id": 3,
+        "category": "Entertainment",
+        "amount": 50.00
+      }
+    ]
+  }
+  

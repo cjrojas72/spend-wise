@@ -6,6 +6,7 @@
     margin: 0;
     width: 100vw;
     height: 100vh;
+    background-color: rgb(241 245 249)
   }
 
   :root{
@@ -25,4 +26,6 @@
   color: var(--ui-color);
   border-color: var(--ui-color);
 }
+
+
 

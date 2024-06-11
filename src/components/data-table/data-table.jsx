@@ -3,19 +3,20 @@ import { Table, TableHead, TableBody, TableRow, TableCell, Checkbox, IconButton 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
 
-const MUIDataTable = ({ data }) => {
+const MUIDataTable = ({ data, headers, columns }) => {
+
+    
   const [selected, setSelected] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
-
 
   const handleSelectAllClick = (event) => {
     setSelectAllChecked(event.target.checked);
     if (event.target.checked) {
       const newSelected = data.map((row) => row.id);
       setSelected(newSelected);
-      return;
+    } else {
+      setSelected([]);
     }
-    setSelected([]);
   };
 
   const handleSelect = (event, id) => {
@@ -55,62 +56,58 @@ const MUIDataTable = ({ data }) => {
 
   return (
     <>
-    <div className='p-4 h-16'>
+      <div className='p-4 h-16'>
         {selectAllChecked && (
-            <div className='flex justify-end p-4'>
-                <Button variant="contained" onClick={handleDeleteSelected}>
-                    Delete All
-                </Button>
-        </div>
-        
-    )}
-    </div>
-    
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={selected.length > 0 && selected.length < data.length}
-              checked={selected.length === data.length}
-              onChange={handleSelectAllClick}
-            />
-          </TableCell>
-          <TableCell>Name</TableCell>
-          <TableCell>Amount</TableCell>
-          <TableCell>Date</TableCell>
-          <TableCell>Action</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {data.map((row, index) => {
-          const isItemSelected = isSelected(row.id);
-          return (
-            <TableRow
-              key={index}
-              hover
-             // onClick={(event) => handleSelect(event, row.id)}
-              role="checkbox"
-              aria-checked={isItemSelected}
-              selected={isItemSelected}
-            >
-              <TableCell padding="checkbox">
-                <Checkbox checked={isItemSelected} onChange={(event) => handleSelect(event, row.id)}/>
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.amount}</TableCell>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>
-                <IconButton onClick={handleDelete} disabled={isItemSelected} aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
-    
+          <div className='flex justify-end p-4'>
+            <Button variant="outlined" color="error" onClick={handleDeleteSelected}>
+              Delete All
+            </Button>
+          </div>
+        )}
+      </div>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell padding="checkbox">
+              <Checkbox
+                indeterminate={selected.length > 0 && selected.length < data.length}
+                checked={selected.length === data.length}
+                onChange={handleSelectAllClick}
+              />
+            </TableCell>
+            {headers.map((header, index) => (
+              <TableCell key={index}>{header}</TableCell>
+            ))}
+            <TableCell>Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row, index) => {
+            const isItemSelected = isSelected(row.id);
+            return (
+              <TableRow
+                key={index}
+                hover
+                role="checkbox"
+                aria-checked={isItemSelected}
+                selected={isItemSelected}
+              >
+                <TableCell padding="checkbox">
+                  <Checkbox checked={isItemSelected} onChange={(event) => handleSelect(event, row.id)} />
+                </TableCell>
+                {columns.map((column, colIndex) => (
+                  <TableCell key={colIndex}>{row[column]}</TableCell>
+                ))}
+                <TableCell>
+                  <IconButton onClick={handleDelete} disabled={isItemSelected} aria-label="delete">
+                    <DeleteIcon color='error' />
+                  </IconButton>
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </>
   );
 };
