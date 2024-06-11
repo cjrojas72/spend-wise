@@ -69,7 +69,7 @@ const MUIDataTable = ({ data, headers, columns }) => {
   };
 
 
-  
+  console.log('MUI table data: ', data);
 
   return (
     <>

@@ -3,6 +3,7 @@ import { ClerkProvider, SignedIn, SignedOut, UserButton } from '@clerk/clerk-rea
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {

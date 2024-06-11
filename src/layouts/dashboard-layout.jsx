@@ -1,24 +1,31 @@
 import * as React from 'react'
 import { useAuth } from "@clerk/clerk-react"
 import { Outlet, useNavigate } from "react-router-dom"
+//import { useDetails } from '../hooks/getFbData'
 
 export default function DashboardLayout() {
-    const { userId, isLoaded } = useAuth()
-    const navigate = useNavigate()
+    const { userId, isLoaded } = useAuth();
+    const navigate = useNavigate();
+    
 
-    console.log('test', userId)
+    console.log('User connected: ', userId);
 
     React.useEffect(() => {
         if (isLoaded && !userId) {
-            navigate("/sign-in")
+            navigate("/sign-in");
         }
-    }, [isLoaded])
+    }, [isLoaded]);
 
     if (!isLoaded) return "Loading..."
 
-    return (
-        <>
-            <Outlet />
-        </>
-    )
+    if(userId){
+        
+        return (
+            <>
+                
+                <Outlet />
+            </>
+        )
+    }
+    
 }
