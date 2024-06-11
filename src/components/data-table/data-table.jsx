@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { Table, TableHead, TableBody, TableRow, TableCell, Checkbox, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from '@mui/material';
+import MessageComponent from '../message-comp/message-comp';
+import MUIModal from '../mui-modal/mui-modal';
 
 const MUIDataTable = ({ data, headers, columns }) => {
 
     
   const [selected, setSelected] = useState([]);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null);
 
   const handleSelectAllClick = (event) => {
     setSelectAllChecked(event.target.checked);
@@ -54,12 +58,27 @@ const MUIDataTable = ({ data, headers, columns }) => {
     setSelectAllChecked(false);
   };
 
+  const handleOpenModal = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+    
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+
+  
+
   return (
     <>
       <div className='p-4 h-16'>
         {selectAllChecked && (
           <div className='flex justify-end p-4'>
-            <Button variant="outlined" color="error" onClick={handleDeleteSelected}>
+            <Button variant="outlined" color="error" onClick={() => handleOpenModal(
+                    <MessageComponent message="Are you sure you want to delete this expense?" />
+                )}>
               Delete All
             </Button>
           </div>
@@ -99,7 +118,10 @@ const MUIDataTable = ({ data, headers, columns }) => {
                   <TableCell key={colIndex}>{row[column]}</TableCell>
                 ))}
                 <TableCell>
-                  <IconButton onClick={handleDelete} disabled={isItemSelected} aria-label="delete">
+                  <IconButton 
+                    onClick={() => handleOpenModal(
+                      <MessageComponent message="Are you sure you want to delete this Expense?" />)} 
+                    disabled={isItemSelected} aria-label="delete">
                     <DeleteIcon color='error' />
                   </IconButton>
                 </TableCell>
@@ -108,7 +130,22 @@ const MUIDataTable = ({ data, headers, columns }) => {
           })}
         </TableBody>
       </Table>
+
+      <MUIModal 
+        isOpen= {isModalOpen}
+        onClose= {handleCloseModal}
+        title= "Delete Expense"
+        content= {modalContent}
+        showToast= {true}
+        toastMsg= "Expense succesfully deleted"
+        btnText='Yes'
+        btnColor= 'error'
+        btnVariant= 'contained'
+        btnCommand= {handleDeleteSelected}
+      />
     </>
+
+    
   );
 };
 

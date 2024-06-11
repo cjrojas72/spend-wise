@@ -1,5 +1,7 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { ClerkProvider, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -18,6 +20,7 @@ export default function RootLayout() {
     >
 
       <main>
+        <ToastContainer />
         <Outlet />
       </main>
     </ClerkProvider>

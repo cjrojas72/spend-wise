@@ -3,8 +3,7 @@ import * as React from 'react';
 //import Button from '@mui/material/Button';
 ///import Modal from '@mui/material/Modal';
 import { Modal, Backdrop, Fade, Card, CardHeader, CardContent, CardActions, Button } from '@mui/material';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const style = {
   position: 'absolute',
@@ -18,25 +17,24 @@ const style = {
   p: 2,
 };
 
-export default function MUIModal({ isOpen, onClose, title, content, buttonText, showToast, toastMsg}) {
+export default function MUIModal({ isOpen, onClose, title, content, showToast, toastMsg, btnText, btnVariant, btnColor, btnCommand }) {
 
-  const notify = () => toast(toastMsg);
+
 
   const handleClick = () => {
     //console.log("click");
-    const nearestButton = document.querySelector('.modal-button-click');
-    if (nearestButton) {
-      nearestButton.click();
-      onClose();
+    let buttonCommand = btnCommand;
 
-      if(showToast){
-        notify();
-      }
-      
+    buttonCommand();
+
+    if(showToast){
+      toast(toastMsg);
     }
-    else{
-      console.log("Run a diff command");
-    }
+
+    onClose();
+
+   
+
   };
 
 
@@ -55,11 +53,10 @@ export default function MUIModal({ isOpen, onClose, title, content, buttonText, 
             </CardContent>
             <CardActions className='justify-end'>
               <Button onClick={onClose}>Cancel</Button>
-              <Button onClick={handleClick} variant="contained" color="primary">{buttonText}</Button>
+              <Button onClick={handleClick} variant={btnVariant} color={btnColor}>{btnText}</Button>
             </CardActions>
           </Card>
       </Modal>
-      <ToastContainer />
     </>
   );
 }
