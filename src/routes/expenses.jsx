@@ -18,6 +18,7 @@ export default function ExpensesPage() {
       const [modalContent, setModalContent] = useState(null);
       const [isDataLoading, setIsDataLoading] = useState(true);
       const { expenses, budgets, error } = useDetails();
+      const [refreshData, setRefreshData] = useState(false);
 
       useEffect(() => {
         // Check if there is an error
@@ -28,6 +29,10 @@ export default function ExpensesPage() {
             setIsDataLoading(false);
         }
       }, [expenses, budgets, error]);
+
+      const handleRefreshData = () => {
+        setRefreshData((prev) => !prev);
+      };
 
       const handleOpenModal = (content) => {
         setModalContent(content);
@@ -74,7 +79,8 @@ export default function ExpensesPage() {
                             <CircularProgress />
                         </div>
                     ) : (
-                      <MUIDataTable  
+                      <MUIDataTable
+                        key={refreshData}  
                         headers={["Description", "Amount", "Date", "Category"]} 
                         data={expenses} 
                         columns ={["description", "amount", "date", "category"]}/>
