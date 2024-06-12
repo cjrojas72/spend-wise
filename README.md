@@ -1,3 +1,5 @@
+<h1>Spend Wise</h1>
+
 Overview
 Spend-Wise is a user-friendly web application built with ReactJS, dedicated to helping users manage their finances efficiently. By integrating Clerk for authentication, Firebase for the database, and styling with MaterialUI and Tailwind, Spend-Wise offers a seamless experience for tracking expenses, setting budgets, and gaining insights into spending habits.
 
