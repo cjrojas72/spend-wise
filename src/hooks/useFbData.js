@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, collection, getDoc, getDocs, connectFirestoreEmulator } from 'firebase/firestore/lite';
+import { getFirestore, collection, getDoc, getDocs, connectFirestoreEmulator } from 'firebase/firestore';
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import { config } from "../../config/firebase";
 
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 // Initialize Firebase app with the provided configuration
 const app = initializeApp(config);
+const db = getFirestore(app);
 
 // Custom hook to fetch details from Firebase Firestore
 export const useDetails = () => {
@@ -17,7 +18,7 @@ export const useDetails = () => {
     const [error, setError] = useState(null);
 
     const { getToken } = useAuth();  // Clerk authentication hook
-    const db = getFirestore(app);    // Firestore database instance
+        // Firestore database instance
     const auth = getAuth(app);       // Firebase authentication instance
 
     
@@ -88,3 +89,6 @@ export const useDetails = () => {
     // Return the fetched details and error state
     return { expenses, budgets, error };
 }
+
+
+export { db, app}

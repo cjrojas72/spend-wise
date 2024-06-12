@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import { addExpense } from '../../../dbOperations/expensesOps';
 
 const categories = [
   'Food',
@@ -29,8 +30,14 @@ const AddExpenseForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    
+    let description = formData.description;
+    let amount = formData.amount;
+    let category = formData.category;
+    //console.log(description, amount, category);
+    if(description && amount && category){
+      addExpense(description, amount, category);
+    }
   };
 
   return (
