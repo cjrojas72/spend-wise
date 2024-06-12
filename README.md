@@ -8,3 +8,13 @@ Intuitive Design: Styled with MaterialUI and Tailwind CSS, Spend-Wise provides a
 Expense Tracking: Users can effortlessly add, edit, and delete expenses, facilitating comprehensive management of financial transactions.
 Budget Control: Set and manage budgets across various expense categories, empowering users to stay within financial limits effectively.
  
+
+
+
+![image 1](spend-wise\public\sc1.png)
+
+![image 2](spend-wise\public\sc2.png)
+
+![image 3](spend-wise\public\sc3.png)
+
+![image 4](spend-wise\public\sc4.png)
