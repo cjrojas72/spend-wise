@@ -7,3 +7,4 @@ Real-time Database Integration: Firebase serves as the backend database, enablin
 Intuitive Design: Styled with MaterialUI and Tailwind CSS, Spend-Wise provides a visually appealing and intuitive interface for users.
 Expense Tracking: Users can effortlessly add, edit, and delete expenses, facilitating comprehensive management of financial transactions.
 Budget Control: Set and manage budgets across various expense categories, empowering users to stay within financial limits effectively.
+ 
